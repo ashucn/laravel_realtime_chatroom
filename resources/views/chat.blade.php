@@ -36,7 +36,7 @@ const app = new Vue({
         addMessage(message){
             message.user = { email: "{{Auth::user()->email}}" };
             // post a message to db
-            axios.post('/messages', message).then(response => {
+            axios.post('/messages', message).then(function(response){
                 message.created_at = response.data.created_at;
                 if(userEmail == message.user.email){
                     this.messages.push(message);
@@ -49,7 +49,7 @@ const app = new Vue({
         console.log("test echo");
         // Echo.private(‘ashuchatroom’);
         Echo.private('ashuchatroom')
-            .listen('MessagePosted', (event) => {
+            .listen('MessagePosted', function (event){
                 console.log(event);
                 // handle event
                 var msg = {
@@ -69,7 +69,7 @@ const app = new Vue({
             });
 
         // get all messages from db
-        axios.get('/messages').then(response => {
+        axios.get('/messages').then(function(response) {
             this.messages = response.data;
         });
         var userEmail = localStorage.getItem('useremail');
