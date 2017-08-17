@@ -5,11 +5,11 @@ Vue.component('chat-message', require('./components/ChatMessage.vue'));
 Vue.component('chat-composer', require('./components/ChatComposer.vue'));
 Vue.component('chat-log', require('./components/ChatLog.vue'));
 
-
 const app = new Vue({
     el: '#app',
     data: {
-        messages: []
+        messages: [],
+        usersInRoom: []
     },
     methods: {
         addMessage(message){
@@ -24,7 +24,16 @@ const app = new Vue({
     created: function(){
         console.log("test echo");
         // Echo.private(‘ashuchatroom’);
-        Echo.private('ashuchatroom')
+        Echo.join('ashuchatroom')
+            .here((users) => {
+                this.usersInRoom = users;
+            })
+            .joining((user)=>{
+                this.usersInRoom.push(user);
+            })
+            .leaving((user)=>{
+                this.usersInRoom = this.usersInRoom.filter( u => u != user );
+            })
             .listen('MessagePosted', (event) => {
                 console.log(event);
                 // handle event

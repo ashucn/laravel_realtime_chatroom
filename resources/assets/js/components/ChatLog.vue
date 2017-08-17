@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-striped">
+    <table class="table">
         <tbody>
             <chat-message v-for="message in messages" :message="message" :key="message.id" @messagesend=""></chat-message>
         </tbody>
