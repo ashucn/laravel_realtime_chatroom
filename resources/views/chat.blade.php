@@ -26,8 +26,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 window.userEmail = localStorage.getItem('useremail');
-if(userEmail == null || userEmail != "{{Auth::user()->email}}"){
-    localStorage.setItem('useremail', "{{Auth::user()->email}}");
+window.currentEmail = "{{Auth::user()->email}}";
+if(userEmail == null || userEmail != currentEmail){
+    localStorage.setItem('useremail', currentEmail);
 }
 </script>
 <script src="{{mix('/js/chat.js')}}"></script>

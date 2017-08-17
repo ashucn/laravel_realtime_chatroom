@@ -15,6 +15,7 @@ const app = new Vue({
         addMessage(message){
             // post a message to db
             axios.post('/messages', message).then(response => {
+                message.user = {email : userEmail};
                 message.created_at = response.data.created_at;
                 this.messages.push(message);
                 $("html, body").animate({ scrollTop: $(document).height() }, "fast");
