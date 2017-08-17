@@ -25,9 +25,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="{{mix('/js/chat.js')}}"></script>
 <script>
-toastr.options = {
-  "positionClass": "toast-top-center"
-}
+
+let userEmail = localStorage.getItem('useremail');
 const app = new Vue({
     el: '#app',
     data: {
@@ -39,12 +38,36 @@ const app = new Vue({
             // post a message to db
             axios.post('/messages', message).then(response => {
                 message.created_at = response.data.created_at;
-                this.messages.push(message);
+                if(userEmail == message.user.email){
+                    this.messages.push(message);
+                }
                 $("html, body").animate({ scrollTop: $(document).height() }, "fast");
             });
         }
     },
     created: function(){
+        console.log("test echo");
+        // Echo.private(‘ashuchatroom’);
+        Echo.private('ashuchatroom')
+            .listen('MessagePosted', (event) => {
+                console.log(event);
+                // handle event
+                let msg = {
+                    message: event.message.message,
+                    user: {
+                        email: event.user.email
+                    }
+                }
+
+                console.log(userEmail, msg.user.email);
+                if(userEmail != msg.user.email){
+                    this.messages.push(msg);
+                }
+
+                $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+
+            });
+
         // get all messages from db
         axios.get('/messages').then(response => {
             this.messages = response.data;
@@ -56,6 +79,10 @@ const app = new Vue({
 
     }
 });
+
+toastr.options = {
+  "positionClass": "toast-top-center"
+}
 
 $(document).ready(function(){
     $("html, body").animate({ scrollTop: $(document).height() }, "fast");

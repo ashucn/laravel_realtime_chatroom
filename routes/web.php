@@ -11,6 +11,8 @@
 |
 */
 
+// Broadcast::routes();
+
 Route::get('/', function () {
     $v = Redis::incr('visits');
     return view('welcome')->withV($v);
@@ -25,7 +27,12 @@ Route::get('/messages', function () {
 })->middleware('auth');
 
 Route::post('/messages', function () {
-    return App\Message::create(['user_id'=> Auth::id(), 'message'=>request()->message]);
+    $message = App\Message::create(['user_id'=> Auth::id(), 'message'=>request()->message]);
+    $user = App\User::find(Auth::id());
+    // announce that a new message has been posted
+    event(new App\Events\MessagePosted($message, $user));
+
+    return ['status'=>'ok'];
 })->middleware('auth');
 // tinker -> factory(App\User::class)->make();
 // tinker -> App\User::first()->messages()->create(["message"=>"hello, ashu!"]);
