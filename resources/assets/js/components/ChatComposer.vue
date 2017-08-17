@@ -1,5 +1,6 @@
 <template>
     <div class="chat-composer messages">
+        <small class="email">{{email}}</small>
         <input type="text" name="" v-model="messageText" @keyup.enter="sendMessage" class="form-control">
         <button class="btn btn-primary" @click="sendMessage" :disabled="messageText==''">Send</button>
     </div>
@@ -9,7 +10,8 @@
 export default {
     data(){
         return {
-            messageText: ''
+            messageText: '',
+            email: currentEmail
         }
     },
     methods:{
@@ -34,5 +36,8 @@ export default {
     }
     .chat-composer input {
         flex: 1 auto;
+    }
+    .chat-composer .email {
+        margin: 5px 5px 0 0;
     }
 </style>

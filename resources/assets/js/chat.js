@@ -17,6 +17,7 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 message.user = {email : userEmail};
                 message.created_at = response.data.created_at;
+                console.log(this.usersInRoom);
                 $("html, body").animate({ scrollTop: $(document).height() }, "fast");
             });
         }
