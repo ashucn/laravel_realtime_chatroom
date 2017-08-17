@@ -27,6 +27,7 @@
 <script>
 window.userEmail = localStorage.getItem('useremail');
 window.currentEmail = "{{Auth::user()->email}}";
+
 if(userEmail == null || userEmail != currentEmail){
     localStorage.setItem('useremail', currentEmail);
 }
