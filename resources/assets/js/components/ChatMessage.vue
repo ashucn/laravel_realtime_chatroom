@@ -19,10 +19,8 @@ export default {
         }
     },
     created: function(){
-        //
-        console.log("user email ",userEmail);
         this.createat = moment.tz(this.message.created_at, "America/Los_Angeles").toNow();
-        if(userEmail == this.message.user.email){
+        if(currentEmail == this.message.user.email){
             this.owner = true;
         }
     }
