@@ -14,11 +14,6 @@
 // Broadcast::routes();
 
 Route::get('/', function () {
-    // $v = Redis::incr('visits');
-    return view('welcome');
-});
-
-Route::get('/chat', function () {
     return view('chat');
 })->middleware('auth');
 
@@ -39,4 +34,6 @@ Route::post('/messages', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    return redirect('/');
+});
