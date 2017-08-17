@@ -11,6 +11,11 @@
     <title>Ashu ChatRoom</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        #app{
+            margin-top: 60px;
+        }
+    </style>
     @yield('styles')
 </head>
 <body>
