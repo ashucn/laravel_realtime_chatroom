@@ -46,10 +46,6 @@ const app = new Vue({
         axios.get('/messages').then(response => {
             this.messages = response.data;
         });
-        var userEmail = localStorage.getItem('useremail');
-        if(userEmail == null || userEmail != "{{Auth::user()->email}}"){
-            localStorage.setItem('useremail', "{{Auth::user()->email}}");
-        }
 
     }
 });

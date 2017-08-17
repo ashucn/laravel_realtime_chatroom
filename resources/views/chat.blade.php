@@ -22,12 +22,15 @@
 @endsection
 
 @section('scripts')
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="{{mix('/js/chat.js')}}"></script>
 <script>
-
-
+window.userEmail = localStorage.getItem('useremail');
+if(userEmail == null || userEmail != "{{Auth::user()->email}}"){
+    localStorage.setItem('useremail', "{{Auth::user()->email}}");
+}
 </script>
+<script src="{{mix('/js/chat.js')}}"></script>
 
 @endsection
 

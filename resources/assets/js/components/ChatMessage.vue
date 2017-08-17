@@ -21,7 +21,6 @@ export default {
     created: function(){
         //
         this.createat = moment.tz(this.message.created_at, "America/Los_Angeles").toNow();
-        var userEmail = localStorage.getItem('useremail');
         if(userEmail == this.message.user.email){
             this.owner = true;
         }
