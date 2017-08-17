@@ -26,7 +26,7 @@
 <script src="{{mix('/js/chat.js')}}"></script>
 <script>
 
-let userEmail = localStorage.getItem('useremail');
+var userEmail = localStorage.getItem('useremail');
 const app = new Vue({
     el: '#app',
     data: {
@@ -52,7 +52,7 @@ const app = new Vue({
             .listen('MessagePosted', (event) => {
                 console.log(event);
                 // handle event
-                let msg = {
+                var msg = {
                     message: event.message.message,
                     user: {
                         email: event.user.email
