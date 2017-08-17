@@ -17,9 +17,6 @@ const app = new Vue({
             axios.post('/messages', message).then(response => {
                 message.user = {email : userEmail};
                 message.created_at = response.data.created_at;
-                if(currentEmail == userEmail){
-                    this.messages.push(message);
-                }
                 $("html, body").animate({ scrollTop: $(document).height() }, "fast");
             });
         }
@@ -37,9 +34,7 @@ const app = new Vue({
                         email: event.user.email
                     }
                 }
-                if(currentEmail != userEmail){
-                    this.messages.push(msg);
-                }
+                this.messages.push(msg);
 
                 $("html, body").animate({ scrollTop: $(document).height() }, "fast");
 
