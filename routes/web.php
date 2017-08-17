@@ -14,8 +14,8 @@
 // Broadcast::routes();
 
 Route::get('/', function () {
-    $v = Redis::incr('visits');
-    return view('welcome')->withV($v);
+    // $v = Redis::incr('visits');
+    return view('welcome');
 });
 
 Route::get('/chat', function () {

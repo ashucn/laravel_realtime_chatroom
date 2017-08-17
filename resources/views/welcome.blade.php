@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel visitor: # {{$v}}
+                    Ashu Chat Room Demo
                 </div>
 
                 <div class="links">
