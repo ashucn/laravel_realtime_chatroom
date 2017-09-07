@@ -15,6 +15,9 @@ const app = new Vue({
         addMessage(message){
             // post a message to db
             axios.post('/messages', message).then(response => {
+                if(response.status != 200){
+                    window.location.href="/";
+                }
                 message.user = {email : userEmail};
                 message.created_at = response.data.created_at;
                 console.log(this.usersInRoom);
